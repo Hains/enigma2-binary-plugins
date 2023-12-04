@@ -97,6 +97,19 @@ from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_FONTS, SCOPE_LIBDIR, SCOPE_SYSETC, resolveFilename
 
+
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	MODEL = BoxInfo.getItem("machinebuild")
+	ARCH = BoxInfo.getItem("architecture")
+except:
+	from boxbranding import getImageDistro, getBoxType, getImageArch
+	IMAGEDISTRO = getImageDistro()
+	MODEL = getBoxType()
+	ARCH = getImageArch()
+
+
 # PLUGIN IMPORTS
 from . import Photoframe, dpf, _  # for localized messages
 from .bluesound import BlueSound
@@ -2529,6 +2542,8 @@ def L4LoadNewConfig(cfg):
 	if isfile(LCD4default):
 		LCD4linux.loadFromFile(LCD4default)
 	L4log("Config-Load", cfg)
+	if MODEL == 'vuduo2':  # due to 2 displays, LCD4linux is integrated in this boximage
+		LCD4linux.loadFromFile("%sdefault.vuduo2" % LCD4data)
 	L4log("Config-Load for 'Vu+ duo²'", cfg)
 	LCD4linux.loadFromFile(cfg)
 	LCD4linux.load()
@@ -15518,7 +15533,7 @@ def autostart(reason, **kwargs):
 
 
 def setup(menuid, **kwargs):
-		return [("LCD4Linux", main, "lcd4linux", None)] if menuid == "setup" else []
+	return [("LCD4Linux", main, "lcd4linux", None)] if menuid == "setup" else []
 
 
 def Plugins(**kwargs):
