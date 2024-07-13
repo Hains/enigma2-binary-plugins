@@ -1,0 +1,59 @@
+name: plugins ci
+
+on:
+  push:
+    paths-ignore:
+      - 'COPYING'
+      - 'README.md'
+      - '**.info'
+      - '**.txt'
+      - '*/CONTROL/*'
+  pull_request:
+    paths-ignore:
+      - 'COPYING'
+      - 'README.md'
+      - '**.info'
+      - '**.txt'
+      - '*/CONTROL/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install python packages
+        run: |
+          pip install flake8
+      - name: Install dev packages
+        run: |
+          sudo apt install gettext python3.11-dev
+      - name: Build plugins
+        env:
+          CC: "gcc-10"
+          CXX: "g++-10"
+        run: |
+          autoreconf -i
+          ./configure CFLAGS=-I/usr/include/tirpc
+          make
+          python -O -m compileall .
+      - name: Check code changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          base: python3
+          list-files: shell
+          filters: |
+            mod:
+              - added|modified: '**.py'
+      - name: Lint changed code
+        continue-on-error: true
+        if: ${{ steps.filter.outputs.mod == 'true' }}
+        run: |
+          mod_files="${{ steps.filter.outputs.mod_files }}"
+          flake8 --ignore=E126,E127,E128,E501,W191 --builtins="_,ngettext,pgettext" --show-source --filename=./${mod_files// /,.\/}
