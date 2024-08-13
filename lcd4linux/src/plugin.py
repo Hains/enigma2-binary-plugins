@@ -172,6 +172,10 @@ USBok = False
 if find_library("usb-0.1") is not None or find_library("usb-1.0") is not None:
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
+elif ARCH in ("aarch64"):
+	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
+	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
+	USBok = True
 Version = "V5.0-r22"
 L4LElist = L4Lelement()
 L4LdoThread = True
@@ -2656,7 +2660,7 @@ def getFB2(check):
 
 def BRI(w1, w2):
 	gb = L4LElist.getBrightness(w2, False)
-	return int(w1) if gb == -1 else gb
+	return w1 if gb == -1 else gb
 
 
 def virtBRI(LCD):
@@ -10313,7 +10317,7 @@ def getNumber(actservice):
 						service = servicelist.getNext()
 						if not service.valid():  # check end of list
 							break
-						playable = not (service.flags & mask) or (service.flags & eServiceReference.isNumberedMarker)
+						playable = not (service.flags & mask)
 						if playable:
 							number += 1
 #						L4logE(" ",service.getPath())
@@ -15288,7 +15292,7 @@ def LCD4linuxPIC(self, session):
 		if "2" in LCD4linux.PopupLCD.value and LCD4linux.LCDType2.value != "00":
 			Brief2.put([putPopup, Para, 2, 2])
 		if "3" in LCD4linux.PopupLCD.value and LCD4linux.LCDType3.value != "00":
-			Brief3.put([putPopup, Para, 3, 3])
+			Brief2.put([putPopup, Para, 3, 3])
 # show isCrashlog
 	if LCD4linux.Crash.value == True:
 		Brief1.put([putCrash, 1, 1])
@@ -15463,7 +15467,15 @@ def autostart(reason, **kwargs):
 
 
 def setup(menuid, **kwargs):
-	return [("LCD4Linux", main, "lcd4linux", None)] if menuid == "setup" else []
+	if IMAGEDISTRO in ("openvix", "openatv", "egami", "openhdf", "openbh", "openspa", "opendroid"):
+		if menuid == "display" and SystemInfo["Display"]:
+			return [("LCD4Linux", main, "lcd4linux", None)]
+		elif menuid == "system" and not SystemInfo["Display"]:
+			return [("LCD4Linux", main, "lcd4linux", None)]
+		else:
+			return []
+	else:
+		return [("LCD4Linux", main, "lcd4linux", None)] if menuid == "setup" else []
 
 
 def Plugins(**kwargs):
