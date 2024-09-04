@@ -1,5 +1,4 @@
 from Plugins.Plugin import PluginDescriptor
-from os import stat
 from .Vps import vps_timers
 from .Vps_setup import VPS_Setup
 from .Modifications import register_vps

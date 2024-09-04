@@ -7,7 +7,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 
-VERSION = "1.8"
+VERSION = "1.9"
 
 
 class VPS_Setup(Screen, ConfigListScreen):
