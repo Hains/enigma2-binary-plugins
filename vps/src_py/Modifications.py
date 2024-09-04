@@ -126,7 +126,7 @@ def new_TimerEntry_createConfig(self):
 				default_value = {False: "yes_safe", True: "yes"}[self.timer.vpsplugin_overwrite]
 
 		elif config.plugins.vps.vps_default.value != "no" and self.timer.eit is not None and self.timer.name != "" and self.timer not in self.session.nav.RecordTimer.timer_list and self.timer not in self.session.nav.RecordTimer.processed_timers:
-			from Vps_check import Check_PDC
+			from .Vps_check import Check_PDC
 			service = self.timerentry_service_ref.ref
 			if service and service.flags & eServiceReference.isGroup:
 				service = getBestPlayableServiceReference(service, eServiceReference())
@@ -161,7 +161,7 @@ def new_TimerEntry_createSetup(self, widget):
 			self.list.append(self.timerVps_enabled_Entry)
 
 			if self.timerentry_vpsplugin_enabled.value != "no":
-				from Vps_check import Check_PDC, VPS_check_PDC_Screen
+				from .Vps_check import Check_PDC, VPS_check_PDC_Screen
 				service = self.timerentry_service_ref.ref
 				if service and service.flags & eServiceReference.isGroup:
 					service = getBestPlayableServiceReference(service, eServiceReference())
@@ -249,7 +249,7 @@ def new_InfoBarInstantRecord_recordQuestionCallback(self, answer):
 		if answer is not None and answer[1] == "event" and config.plugins.vps.instanttimer.value != "no" and entry is not None and entry >= 0:
 			# If we aren't checking PDC, just put the values in directly
 			if not config.plugins.vps.do_PDC_check.getValue():
-				from Vps import vps_timers
+				from .Vps import vps_timers
 				if config.plugins.vps.instanttimer.value == "yes":
 					self.recording[entry].vpsplugin_enabled = True
 					self.recording[entry].vpsplugin_overwrite = True
@@ -259,7 +259,7 @@ def new_InfoBarInstantRecord_recordQuestionCallback(self, answer):
 					self.recording[entry].vpsplugin_overwrite = False
 					vps_timers.checksoon()
 			else:
-				from Vps_check import VPS_check_on_instanttimer
+				from .Vps_check import VPS_check_on_instanttimer
 				rec_ref = self.recording[entry].service_ref.ref
 				if rec_ref and rec_ref.flags & eServiceReference.isGroup:
 					rec_ref = getBestPlayableServiceReference(rec_ref, eServiceReference())
