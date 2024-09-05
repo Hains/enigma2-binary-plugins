@@ -20,7 +20,7 @@ msgid "Cancel"
 msgstr "Отмена"
 
 msgid "Check for PDC"
-msgstr "Проверка PDC"
+msgstr "Проверка для PDC"
 
 msgid "Check for PDC availability on each service"
 msgstr "Проверять доступность PDC для каждого сервиса."
@@ -44,7 +44,7 @@ msgid "If enabled and necessary, the plugin will wake up the Dreambox from Deep-
 msgstr "Если включено и необходимо, плагин будет автоматически включать ресивер из режима глубокого ожидания в определенное заданное время, для контроля программы, не начинается ли она раньше."
 
 msgid "If possible, x minutes before a timer starts VPS-Plugin will control whether the programme begins earlier. (0 disables feature)"
-msgstr "Если это возможно, плагин VPS проверит за х минут до фактического начала, не начинается ли программа раньше. (0 отключает этот параметр)"
+msgstr "Если это возможно, плагин VPS проверит за Х минут до фактического начала, не начинается ли программа раньше. (0 - отключает этот параметр)"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr ""
@@ -70,13 +70,13 @@ msgid "Seeking connected events"
 msgstr "Поиск связанных событий"
 
 msgid "Starting time"
-msgstr "Время начала"
+msgstr "Время начала (в минутах)"
 
 msgid ""
 "The VPS-Plugin couldn't check if the selected channel supports VPS for manually programmed timers!\n"
 " Do you really want to enable VPS?"
 msgstr ""
-"Плагин VPS не может проверить, поддерживает ли выбранный канал VPS, для ручного программированния таймеров!\n"
+"Плагин VPS не может проверить, поддерживает ли выбранный канал VPS, для ручного программирования таймеров!\n"
 " Вы действительно хотите включить VPS?"
 
 msgid ""
@@ -87,13 +87,13 @@ msgstr ""
 "Хотите включить VPS?"
 
 msgid "The recording will last n seconds longer after the channel sent the stop signal."
-msgstr "Запись будет продолжаться в течение n секунд после получения каналом сигнала остановки."
+msgstr "Запись будет продолжаться в течение Х секунд после получения каналом сигнала остановки."
 
 msgid ""
 "The selected channel doesn't support VPS for manually programmed timers!\n"
 " Do you really want to enable VPS?"
 msgstr ""
-"Выбранный канал не поддерживает VPS для ручного программированния таймеров!\n"
+"Выбранный канал не поддерживает VPS для ручного программирования таймеров!\n"
 " Вы действительно хотите включить VPS?"
 
 msgid "This plugin can determine whether a programme begins earlier or lasts longer. The channel has to provide reliable data."
@@ -110,7 +110,7 @@ msgid "VPS enabled by default"
 msgstr "VPS включить по дефолту"
 
 msgid "VPS-Plugin Information"
-msgstr "Информация плагина VPS"
+msgstr "Информация плагина VPS (система видео программирования)"
 
 msgid ""
 "VPS-Plugin can react on delays arising in the startTime or endTime of a programme. VPS is only supported by certain channels!\n"
@@ -158,7 +158,7 @@ msgstr ""
 " SF\n"
 "\n"
 "\n"
-"Для таймера запрограммированного вручную (без помощи EPG), необходимо установить VPS-время, для работы VPS. VPS-время, также известное как PDC, является первым опубликованым в стартовое время, например в данных журнала. Если Вы примените VPS-время, необходимо оставить пустое название таймера!"
+"Для таймера запрограммированного вручную (без помощи EPG), необходимо установить VPS-время, для работы VPS. VPS-время, также известное как PDC (управление передачей программ), является первым опубликованым в стартовое время, например в данных журнала. Если Вы примените VPS-время, необходимо оставить пустое название таймера!"
 
 msgid "VPS-Plugin checks if the channel supports VPS ..."
 msgstr "Плагин VPS проверяет канал на поддержку VPS ..."
@@ -178,16 +178,16 @@ msgstr ""
 " Вы действительно хотите включить VPS?"
 
 msgid "VPS-Time (date)"
-msgstr "VPS-Время (дата)"
+msgstr "VPS-время (дата)"
 
 msgid "VPS-Time (time)"
-msgstr "VPS-Время (время)"
+msgstr "VPS-время (время)"
 
 msgid "Wakeup from Deep-Standby is allowed"
 msgstr "Включение из режима глубокого ожидания"
 
 msgid "When yes, VPS will be enabled on instant records (stop after current event), if the channel supports VPS."
-msgstr "Если да, VPS будет включен для мгновенных аписей (остановка после текущего события), если канал поддерживает VPS."
+msgstr "Если да, то VPS будет включен для мгновенных записей (остановка после текущего события), если канал поддерживает VPS."
 
 msgid "Yes"
 msgstr "Да"
