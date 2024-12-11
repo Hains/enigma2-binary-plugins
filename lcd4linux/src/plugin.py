@@ -5488,14 +5488,10 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			"green": self.save,
 			"yellow": self.LCDrestart,
 			"blue": self.Page,
-			"nextBouquet": self.KeyUp,
-			"prevBouquet": self.KeyDown,
  			"save": self.save,
 			"cancel": self.cancel,
 			"menu": self.SetupMenu,
 			"displayHelp": self.Exchange,
-			"ok": self.keyOK,
-			"seekFwd": self.NextScreenKey,
 			"info": self.ResetInfos
 		}, -1)
 		self.mode = _("On")
@@ -8174,34 +8170,6 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		ConfigStandby = False
 		isMediaPlayer = self.SaveisMediaPlayer
 		TFTCheck(False)
-
-	def keyLeft(self):
-		L4logE("key L")
-		self.LastSelect = str(self["config"].getCurrentIndex()) + self.getCurrentValue()[:3]
-		ConfigListScreen.keyLeft(self)
-		self.SetList()
-
-	def keyRight(self):
-		L4logE("key R")
-		self.LastSelect = str(self["config"].getCurrentIndex()) + self.getCurrentValue()[:3]
-		ConfigListScreen.keyRight(self)
-		self.SetList()
-
-	def KeyUp(self):
-		self.LastSelect = str(self["config"].getCurrentIndex())
-		L4logE("key U")
-		if self["config"].getCurrentIndex() - self.ConfLines > 0:
-			self["config"].setCurrentIndex(self["config"].getCurrentIndex() - self.ConfLines)
-		else:
-			self["config"].setCurrentIndex(0)
-
-	def KeyDown(self):
-		self.LastSelect = str(self["config"].getCurrentIndex())
-		L4logE("key D")
-		if self["config"].getCurrentIndex() + self.ConfLines <= (len(self["config"].getList()) - 1):
-			self["config"].setCurrentIndex(self["config"].getCurrentIndex() + self.ConfLines)
-		else:
-			self["config"].setCurrentIndex((len(self["config"].getList()) - 1))
 
 	def restartGUI(self, answer):
 		if answer:
