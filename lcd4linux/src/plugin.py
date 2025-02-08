@@ -5531,6 +5531,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			"cancel": self.cancel,
 			"menu": self.SetupMenu,
 			"displayHelp": self.Exchange,
+			"ok": self.keyOK,
 			"info": self.ResetInfos
 		}, -1)
 		self.mode = _("On")
@@ -8259,6 +8260,18 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		ConfigStandby = False
 		isMediaPlayer = self.SaveisMediaPlayer
 		TFTCheck(False)
+
+	def keyLeft(self):
+		L4logE("key L")
+		self.LastSelect = str(self["config"].getCurrentIndex()) + self.getCurrentValue()[:3]
+		ConfigListScreen.keyLeft(self)
+		self.SetList()
+
+	def keyRight(self):
+		L4logE("key R")
+		self.LastSelect = str(self["config"].getCurrentIndex()) + self.getCurrentValue()[:3]
+		ConfigListScreen.keyRight(self)
+		self.SetList()
 
 	def restartGUI(self, answer):
 		if answer:
