@@ -23,7 +23,6 @@ M = [
 	_("Remote Box"), _("WWW Converter"), _("WebIF"), _("MJPEG Stream"), _("Box-Skin-LCD"), _("Tuner"), _("Key"), _("BlueSound"), _("Sonos"),
 	_("MusicCast")
 	]
-
 Mode = "1"
 ModeOld = ""
 Element = ""
@@ -123,7 +122,7 @@ class LCD4linuxConfigweb(resource.Resource):
 				if IP.startswith(x):
 					Block = True
 					break
-		if Block == True:
+		if Block is True:
 			html = "<html>"
 			html += "<head>\n"
 			html += "<meta http-equiv=\"Content-Language\" content=\"de\">\n"
@@ -385,7 +384,7 @@ class LCD4linuxConfigweb(resource.Resource):
 						if _a.find("BildFile") > 0:
 							getBilder()
 						if _a.find("WWW1") > 0:
-							if _a.find("WWW1url") > 0 or isfile(WWWpic % "1") == False:
+							if _a.find("WWW1url") > 0 or isfile(WWWpic % "1") is False:
 								Cwww = True
 							else:
 								rmFile(WWWpic % "1p")
@@ -425,7 +424,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += ".style1 {\n"
 		html += "vertical-align: middle; font-size:8px; }\n"
 		html += "</style>\n"
-		if L4LElement.getRefresh() == True:
+		if L4LElement.getRefresh() is True:
 			GI = getINFO().split()
 			GR = min(int(float(GI[6])) + 1, 6) if len(GI) > 6 else 6
 			html += f"<meta http-equiv=\"refresh\" content=\"{GR}\">\n"
@@ -661,7 +660,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "<input style=\"width: 400px\" type=\"text\" name=\"ex\">\n"
 			html += "<input type=\"submit\" value=\"{}\">\n".format(_l(_("Exec")))
 			html += "</form>\n"
-		if StatusMode == True:
+		if StatusMode is True:
 			html += "<br />\n"
 			html += f"Screen: {str(getScreenActive(True))}<br />\n"
 			html += f"Hold/HoldKey: {str(getSaveEventListChanged())}/{str(L4LElement.getHoldKey())}<br />\n"
